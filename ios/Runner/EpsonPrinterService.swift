@@ -9,6 +9,7 @@ class EpstonPrinterService: NSObject, Epos2DiscoveryDelegate{
     print(deviceInfo!)
     printerList.append(deviceInfo)
   }
+  
   func startDiscovery() {
     let result = Epos2Discovery.start(filterOption, delegate: self)
            if result != EPOS2_SUCCESS.rawValue {

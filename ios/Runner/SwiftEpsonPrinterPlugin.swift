@@ -14,4 +14,5 @@ public class SwiftEpsonPrinterPlugin: NSObject, FlutterPlugin {
     }
     result("iOS " + UIDevice.current.systemVersion)
   }
+  
 }

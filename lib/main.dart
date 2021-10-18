@@ -57,16 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void initCallbackHandler() {
-    EpsonPrinter.setMethodCallHandler((MethodCall call) async {
-      switch (call.method) {
-        case 'deviceInfo':
-          print(call.arguments);
-          break;
-        default:
-          print(
-              "Callback Method Not Found: ${call.method}\nArguments: ${call.arguments}");
-      }
-    });
+    final printer = EpsonPrinter.onDiscovery();
+    print("printer");
+    print(printer);
   }
 
   @override
@@ -102,16 +95,25 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+          children: <Widget>[
+            ElevatedButton(
+                onPressed: () => EpsonPrinter.startDiscovery(),
+                child: Text("プリンター検索開始")),
+            ElevatedButton(
+                onPressed: () => EpsonPrinter.stopDiscovery(),
+                child: Text("プリンター検索ストップ")),
+            ElevatedButton(
+                onPressed: () => EpsonPrinter.initilizePrinter(),
+                child: Text("プリンター初期化")),
+            ElevatedButton(
+                onPressed: () => EpsonPrinter.createReceiptData(),
+                child: Text("レシートプリント"))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          EpsonPrinter.startPrinterDiscovery();
+          EpsonPrinter.startDiscovery();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
